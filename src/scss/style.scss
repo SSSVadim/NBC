@@ -1,0 +1,347 @@
+/*<МИКСИНЫ>=======================================================================================*/
+@mixin anim($time, $delay) {
+	-webkit-transition: all $time ease $delay;
+	-moz-transition: all $time ease $delay;
+	-ms-transition: all $time ease $delay;
+	-o-transition: all $time ease $delay;
+	transition: all $time ease $delay;
+}
+@mixin rotate($deg) {
+	-moz-transform: rotate($deg);
+	-ms-transform: rotate($deg);
+	-webkit-transform: rotate($deg);
+	-o-transform: rotate($deg);
+	transform: rotate($deg);
+}
+@mixin flexbox() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	font-size: 0;
+}
+@mixin tr($x, $y, $z) {
+	transform: translate3d($x, $y, $z);
+}
+@mixin scale($num) {
+	-moz-transform: scale($num);
+	-ms-transform: scale($num);
+	-webkit-transform: scale($num);
+	-o-transform: scale($num);
+	transform: scale($num);
+}
+/*===============================================================================================*/
+
+/*<ШРИФТЫ>=======================================================================================*/
+@mixin font($font_name, $file_name, $weight, $style) {
+	@font-face {
+		font-family: $font_name;
+		font-display: swap;
+		src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+		font-weight: #{$weight};
+		font-style: #{$style};
+	}
+}
+@import "fonts";
+/*===============================================================================================*/
+/*<ШРИФТ ПО УМОЛЧАНИЮ>=======================================================================================*/
+$fontfamily: "Roboto";
+/*===============================================================================================*/
+
+/*<БРЕЙКПОИНТЫ>=======================================================================================*/
+$minwidth: 320px;
+$mw: 1290; /* КОНТЕЙНЕР */
+$md1: $mw + 12;
+$md2: 992.98;
+$md3: 767.98;
+$md4: 479.98;
+/*===============================================================================================*/
+
+/*<ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>=======================================================================================*/
+* {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+* {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+*,
+*:before,
+*:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+:focus,
+:active {
+	outline: none;
+}
+a:focus,
+a:active {
+	outline: none;
+}
+aside,
+nav,
+footer,
+header,
+section {
+	display: block;
+}
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	min-width: $minwidth;
+	position: relative;
+	width: 100%;
+	color: #000;
+}
+body {
+	font-size: 100%;
+	line-height: 1;
+	font-size: 14px;
+	font-family: $fontfamily;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	&.lock {
+		overflow: hidden;
+		@media (max-width: $md3+px) {
+			width: 100%;
+			position: fixed;
+			overflow: hidden;
+		}
+	}
+}
+input,
+button,
+textarea {
+	font-family: $fontfamily;
+}
+input::-ms-clear {
+	display: none;
+}
+button {
+	cursor: pointer;
+}
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+a,
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+ul li {
+	list-style: none;
+}
+img {
+	vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: inherit;
+	font-size: inherit;
+}
+/*===============================================================================================*/
+
+/*<ОБОЛОЧКА + ОТБРАСЫВАНИЕ ФУТЕРА>===============================================================*/
+.wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	&.loaded {
+	}
+}
+
+.page {
+	flex: 1 1 auto;
+}
+/*===============================================================================================*/
+
+/*<ОСНОВНАЯ СЕТКА>=======================================================================================*/
+.container {
+	max-width: $mw + px;
+	margin: 0 auto;
+	width: 100%;
+	@media (max-width: $md1+px) {
+		max-width: 970px;
+	}
+	@media (max-width: $md2+px) {
+		max-width: 750px;
+	}
+	@media (max-width: $md3+px) {
+		max-width: none;
+		padding: 0 10px;
+	}
+}
+/*===============================================================================================*/
+
+/*<ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>=======================================================================================*/
+@import "popup.scss";
+@import "header.scss";
+@import "footer.scss";
+/*===============================================================================================*/
+
+/*<ПОДКЛЮЧЕНИЕ ФАЙЛОВ UI СТИЛЕЙ, ФОРМ И ГОТОВЫХ КЛАССОВ>=======================================================================================*/
+@import "forms.scss";
+@import "ui.scss";
+@import "swiper-bundle.scss";
+/*===============================================================================================*/
+
+/*<БЛОК ЕСЛИ НУЖНО ASIDE-MENU>=======================================================================================*/
+.page {
+	flex: 1 1 auto; //по умолчанию есть в стилях выше
+}
+
+/*===============================================================================================*/
+
+/*<ОСНОВНОЙ БЛОК>=======================================================================================*/
+/**********************************/
+/****** MD 1182+ (container 1170 + 12) ******/
+/**********************************/
+
+/* FIRST SCREEN MD0 */
+/* ======================== */
+.first-screen {
+	position: relative;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+
+	&:after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: rgba(0, 0, 0, 0.15);
+	}
+	&__content-wrapper {
+		position: relative;
+		z-infdex: 2;
+		color: #fff;
+		max-width: 850px;
+	}
+	&__title {
+		font-weight: bold;
+		font-size: 60px;
+		letter-spacing: 0.02em;
+		color: #ffffff;
+		margin: 0px 0px 30px 0px;
+		span {
+			color: #3ce810;
+		}
+	}
+	&__subtitle {
+		font-size: 20px;
+		line-height: 30px;
+		letter-spacing: 0.02em;
+		margin: 0px 0px 35px 0px;
+		color: #ffffff;
+	}
+	&__btn {
+		padding: 25px 65px;
+
+		&:hover {
+			box-shadow: 0 0 25px 12px #3ce810;
+			transition: all 0.3s 0s;
+		}
+	}
+	&__arrow {
+		position: absolute;
+		z-index: 2;
+		border-radius: 50px;
+		width: 40px;
+		height: 40px;
+		top: 92%;
+		left: 50%;
+		@include tr(-50%, 0%, 0px);
+		background-color: #fff;
+		transition: all 0.3s ease 0s;
+		animation: arrow 1.5s linear infinite;
+
+		&:hover {
+			box-shadow: 0 0 25px 12px #3ce810;
+			transition: all 0.3s 0s;
+		}
+
+		img {
+			position: absolute;
+			width: 23px;
+			top: 50%;
+			left: 50%;
+			@include tr(-50%, -50%, 0px);
+		}
+
+		@keyframes arrow {
+			0% {
+				top: 92%;
+			}
+			50% {
+				top: 94%;
+			}
+			100% {
+				top: 92%;
+			}
+		}
+	}
+	&__background {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+}
+
+.title {
+}
+.subtitle {
+}
+.btn {
+}
+.ibg {
+}
+
+/* END FIRST SCREEN MD0 */
+
+/******  END MD 1182+ (container 1170 + 12)  *******/
+
+/**********************************/
+/****** MD 1 (993-1182) (container 970) ******/
+/**********************************/
+@media (max-width: $md1+px) {
+} /******  END MD 1 (993-1182) (container 970) *******/
+
+/**********************************/
+/****** MD 2 (768 - 993) (container 750) ******/
+/**********************************/
+@media (max-width: $md2+px) {
+} /******  END MD 2 (768 - 993) (container 750) *******/
+
+/**********************************/
+/****** MD 3 (480 - 768) (container none, padding 0 10) ******/
+/**********************************/
+@media (max-width: $md3+px) {
+} /******  END MD 3  (container none, padding 0 10) *******/
+
+/**********************************/
+/****** MD 4 (320 - 480) (container none, padding 0 10) ******/
+/**********************************/
+@media (max-width: $md4+px) {
+} /* END MD 4  (container none, padding 0 10)*/
+
+/*=============================================================================================== */
